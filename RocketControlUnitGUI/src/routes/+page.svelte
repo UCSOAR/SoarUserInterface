@@ -164,11 +164,11 @@
 	$: nos1_mass_display = $nos1_mass === undefined ? 'N/A' : Number($nos1_mass).toFixed(2);
 	$: nos2_mass_display = $nos2_mass === undefined ? 'N/A' : Number($nos2_mass).toFixed(2);
 
-	$: pt1_pressure_display = $pt1_pressure === undefined ? 'pt1 N/A' : $pt1_pressure;
-	$: pt2_pressure_display = $pt2_pressure === undefined ? 'pt2 N/A' : $pt2_pressure;
-	$: pt3_pressure_display = $pt3_pressure === undefined ? 'pt3 N/A' : $pt3_pressure;
-	$: pt4_pressure_display = $pt4_pressure === undefined ? 'pt4 N/A' : $pt4_pressure;
-    $: pt5_pressure_display = $pt5_pressure === undefined ? 'pt5 N/A' : $pt5_pressure;
+	$: pt1_pressure_display = $pt1_pressure === undefined ? 'N/A' : $pt1_pressure;
+	$: pt2_pressure_display = $pt2_pressure === undefined ? 'N/A' : $pt2_pressure;
+	$: pt3_pressure_display = $pt3_pressure === undefined ? 'N/A' : $pt3_pressure;
+	$: pt4_pressure_display = $pt4_pressure === undefined ? 'N/A' : $pt4_pressure;
+    $: pt5_pressure_display = $pt5_pressure === undefined ? 'N/A' : $pt5_pressure;
 
 	$: system_state_display = $system_state === undefined ? 'N/A' : $system_state.replace('SYS_', '');
 
