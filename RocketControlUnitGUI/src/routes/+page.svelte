@@ -1,6 +1,6 @@
 <script lang="ts">
 	import "../styles/display.postcss";
-	import Diagram from '$lib/components/NewHybrid.svelte';
+	import Diagram from '$lib/components/Diagram.svelte';
 	import { initTimestamps, type Timestamps } from '$lib/timestamps';
 	import { usePocketbase } from '$lib/hooks/usePocketbase';
 	import { initStores, auth, currentState } from '$lib/stores';
