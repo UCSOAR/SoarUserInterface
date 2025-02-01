@@ -142,12 +142,12 @@
 
 	$: ac2_display = $ac2_open === undefined ? 'AC2 N/A' : $ac2_open ? 'ON' : 'OFF';
 
-	$: pbv1_display = $pbv1_open === undefined ? 'pbv1 N/A' : $pbv1_open ? 'OPEN' : 'CLOSE';
-	$: pbv2_display = $pbv2_open === undefined ? 'pbv2 N/A' : $pbv2_open ? 'OPEN' : 'CLOSE';
-	$: pbv3_display = $pbv3_open === undefined ? 'pbv3 N/A' : $pbv3_open ? 'OPEN' : 'CLOSE';
-	$: pbv4_display = $pbv4_open === undefined ? 'pbv4 N/A' : $pbv4_open ? 'CLOSE' : 'OPEN';
-    $: pbv5_display = $pbv5_open === undefined ? 'pbv5 N/A' : $pbv5_open ? 'CLOSE' : 'OPEN';
-    $: pbv6_display = $pbv6_open === undefined ? 'pbv6 N/A' : $pbv6_open ? 'CLOSE' : 'OPEN';
+	$: pbv1_display = $pbv1_open === undefined ? 'pbv1 N/A' : $pbv1_open ? 'OPEN' : 'CLOSED';
+	$: pbv2_display = $pbv2_open === undefined ? 'pbv2 N/A' : $pbv2_open ? 'OPEN' : 'CLOSED';
+	$: pbv3_display = $pbv3_open === undefined ? 'pbv3 N/A' : $pbv3_open ? 'OPEN' : 'CLOSED';
+	$: pbv4_display = $pbv4_open === undefined ? 'pbv4 N/A' : $pbv4_open ? 'CLOSED' : 'OPEN';
+    $: pbv5_display = $pbv5_open === undefined ? 'pbv5 N/A' : $pbv5_open ? 'CLOSED' : 'OPEN';
+    $: pbv6_display = $pbv6_open === undefined ? 'pbv6 N/A' : $pbv6_open ? 'CLOSED' : 'OPEN';
 
 	$: sol5_display = $sol5_open === undefined ? 'sol5 N/A' : $sol5_open ? 'OPEN' : 'CLOSE';
 	$: sol6_display = $sol6_open === undefined ? 'sol6 N/A' : $sol6_open ? 'OPEN' : 'CLOSE';
