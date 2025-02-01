@@ -21,6 +21,7 @@ export interface Stores {
     tc3_temperature: Writable<any>;
     tc4_temperature: Writable<any>;
     tc5_temperature: Writable<any>;
+	tc6_temperature: Writable<any>;
 	nos1_mass: Writable<any>;
 	nos2_mass: Writable<any>;
 	pt1_pressure: Writable<string | number | undefined>;
@@ -28,6 +29,9 @@ export interface Stores {
 	pt3_pressure: Writable<string | number | undefined>;
 	pt4_pressure: Writable<string | number | undefined>;
     pt5_pressure: Writable<string | number | undefined>;
+	pt6_pressure: Writable<string | number | undefined>;
+	pt7_pressure: Writable<string | number | undefined>;
+	pt8_pressure: Writable<string | number | undefined>;
 	system_state: Writable<string | undefined>;
 	timer_state: Writable<string | undefined>;
 	timer_period: Writable<number | undefined>;
@@ -56,6 +60,7 @@ export const initStores = () => {
 		tc3_temperature: writable(undefined),
 		tc4_temperature: writable(undefined),
 		tc5_temperature: writable(undefined),
+		tc6_temperature: writable(undefined),
 		nos1_mass: writable(undefined),
 		nos2_mass: writable(undefined),
 		pt1_pressure: writable<string | number | undefined>(undefined),
@@ -63,6 +68,9 @@ export const initStores = () => {
 		pt3_pressure: writable<string | number | undefined>(undefined),
 		pt4_pressure: writable<string | number | undefined>(undefined),
 		pt5_pressure: writable<string | number | undefined>(undefined),
+		pt6_pressure: writable<string | number | undefined>(undefined),
+		pt7_pressure: writable<string | number | undefined>(undefined),
+		pt8_pressure: writable<string | number | undefined>(undefined),
 		system_state: writable<string | undefined>(undefined),
 		timer_state: writable<string | undefined>(undefined),
 		timer_period: writable<number | undefined>(undefined),

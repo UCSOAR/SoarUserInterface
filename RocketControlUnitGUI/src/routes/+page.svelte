@@ -50,6 +50,7 @@
         tc3_temperature,
         tc4_temperature,
         tc5_temperature,
+        tc6_temperature,
 
 		nos1_mass,
 		nos2_mass,
@@ -59,6 +60,9 @@
 		pt3_pressure,
 		pt4_pressure,
         pt5_pressure,
+		pt6_pressure,
+		pt7_pressure,
+		pt8_pressure,
 
 		box1_on,
         box2_on,
@@ -160,6 +164,7 @@
     $: tc3_display = $tc3_temperature === undefined ? 'N/A' : $tc3_temperature;
     $: tc4_display = $tc4_temperature === undefined ? 'N/A' : $tc4_temperature;
     $: tc5_display = $tc5_temperature === undefined ? 'N/A' : $tc5_temperature;
+	$: tc6_display = $tc6_temperature === undefined ? 'N/A' : $tc6_temperature;
 
 	$: nos1_mass_display = $nos1_mass === undefined ? 'N/A' : Number($nos1_mass).toFixed(2);
 	$: nos2_mass_display = $nos2_mass === undefined ? 'N/A' : Number($nos2_mass).toFixed(2);
@@ -169,6 +174,9 @@
 	$: pt3_pressure_display = $pt3_pressure === undefined ? 'N/A' : $pt3_pressure;
 	$: pt4_pressure_display = $pt4_pressure === undefined ? 'N/A' : $pt4_pressure;
     $: pt5_pressure_display = $pt5_pressure === undefined ? 'N/A' : $pt5_pressure;
+	$: pt6_pressure_display = $pt6_pressure === undefined ? 'N/A' : $pt6_pressure;
+	$: pt7_pressure_display = $pt7_pressure === undefined ? 'N/A' : $pt7_pressure;
+	$: pt8_pressure_display = $pt8_pressure === undefined ? 'N/A' : $pt8_pressure;
 
 	$: system_state_display = $system_state === undefined ? 'N/A' : $system_state.replace('SYS_', '');
 
@@ -408,6 +416,10 @@
 		<p>{tc5_display}</p>
 	</div>
 
+	<div class="tc6 rcu_temp {rcuTempOutdated ? 'outdated' : ''}">
+		<p>{tc6_display}</p>
+	</div>
+
 	<div class="nos1 nos_load_cell {nosLoadCellOutdated ? 'outdated' : ''}">
 		<p>{nos1_mass_display}</p>
 	</div>
@@ -434,6 +446,18 @@
 
     <div class="pt5_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
 		<p>{pt5_pressure_display}</p>
+	</div>
+
+	<div class="pt6_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
+		<p>{pt6_pressure_display}</p>
+	</div>
+
+	<div class="pt7_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
+		<p>{pt7_pressure_display}</p>
+	</div>
+
+	<div class="pt8_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
+		<p>{pt8_pressure_display}</p>
 	</div>
 
 	<div class="system_state sys_state {sysStateOutdated ? 'outdated' : ''}">
