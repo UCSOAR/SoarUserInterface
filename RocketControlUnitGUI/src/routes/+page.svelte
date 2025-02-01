@@ -155,11 +155,11 @@
 	$: sol8a_display = $sol8a_open === undefined ? 'sol8a N/A' : $sol8a_open ? 'OPEN' : 'CLOSE';
 	$: sol8b_display = sol8b_open === undefined ? 'sol8b N/A' : $sol8b_open ? 'OPEN' : 'CLOSE';
 
-	$: tc1_display = $tc1_temperature === undefined ? 'tc1 N/A' : $tc1_temperature;
-	$: tc2_display = $tc2_temperature === undefined ? 'tc2 N/A' : $tc2_temperature;
-    $: tc3_display = $tc3_temperature === undefined ? 'tc3 N/A' : $tc3_temperature;
-    $: tc4_display = $tc4_temperature === undefined ? 'tc4 N/A' : $tc4_temperature;
-    $: tc5_display = $tc5_temperature === undefined ? 'tc5 N/A' : $tc5_temperature;
+	$: tc1_display = $tc1_temperature === undefined ? 'N/A' : $tc1_temperature;
+	$: tc2_display = $tc2_temperature === undefined ? 'N/A' : $tc2_temperature;
+    $: tc3_display = $tc3_temperature === undefined ? 'N/A' : $tc3_temperature;
+    $: tc4_display = $tc4_temperature === undefined ? 'N/A' : $tc4_temperature;
+    $: tc5_display = $tc5_temperature === undefined ? 'N/A' : $tc5_temperature;
 
 	$: nos1_mass_display = $nos1_mass === undefined ? 'N/A' : Number($nos1_mass).toFixed(2);
 	$: nos2_mass_display = $nos2_mass === undefined ? 'N/A' : Number($nos2_mass).toFixed(2);
