@@ -161,8 +161,8 @@
     $: tc4_display = $tc4_temperature === undefined ? 'tc4 N/A' : $tc4_temperature;
     $: tc5_display = $tc5_temperature === undefined ? 'tc5 N/A' : $tc5_temperature;
 
-	$: nos1_mass_display = $nos1_mass === undefined ? 'nos1 N/A' : Number($nos1_mass).toFixed(2);
-	$: nos2_mass_display = $nos2_mass === undefined ? 'nos2 N/A' : Number($nos2_mass).toFixed(2);
+	$: nos1_mass_display = $nos1_mass === undefined ? 'N/A' : Number($nos1_mass).toFixed(2);
+	$: nos2_mass_display = $nos2_mass === undefined ? 'N/A' : Number($nos2_mass).toFixed(2);
 
 	$: pt1_pressure_display = $pt1_pressure === undefined ? 'pt1 N/A' : $pt1_pressure;
 	$: pt2_pressure_display = $pt2_pressure === undefined ? 'pt2 N/A' : $pt2_pressure;
