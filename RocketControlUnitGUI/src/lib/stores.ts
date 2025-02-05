@@ -38,6 +38,9 @@ export interface Stores {
 	timer_remaining: Writable<number | undefined>;
 	box1_on: Writable<any>;
 	box2_on: Writable<any>;
+	mev_open: Writable<any>;
+	battery_voltage: Writable<any>;
+	power_source: Writable<any>;
 }
 
 export const initStores = () => {
@@ -77,5 +80,8 @@ export const initStores = () => {
 		timer_remaining: writable<number | undefined>(undefined),
 		box1_on: writable(undefined),
 		box2_on: writable(undefined),
+		mev_open: writable(undefined),
+		battery_voltage: writable(undefined),
+		power_source: writable(undefined)
 	};
 };

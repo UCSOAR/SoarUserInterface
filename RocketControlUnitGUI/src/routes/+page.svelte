@@ -70,7 +70,11 @@
 		system_state,
 		timer_state,
 		timer_period,
-		timer_remaining
+		timer_remaining,
+
+		mev_open, 
+		power_source,
+		battery_voltage
 	} = stores;
 	
 	onMount(() => {
@@ -185,7 +189,11 @@
 	$: timer_remaining_display = $timer_remaining === undefined ? 'N/A' : ($timer_remaining / 1000).toFixed(0); // Convert to seconds
 
 	$: box1_display = $box1_on === undefined ? 'N/A' : $box1_on ? 'LIVE' : 'DEAD';
-	$: box2_display = $box2_on === undefined ? 'N/A' : $box2_on ? 'LIVE' : 'DEAD'
+	$: box2_display = $box2_on === undefined ? 'N/A' : $box2_on ? 'LIVE' : 'DEAD';
+
+	$: mev_display = $mev_open === undefined ? 'N/A' : $mev_open ? 'OPEN' : 'CLOSED';
+	$: battery_display = $battery_voltage === undefined ? 'N/A' : $battery_voltage;
+	$: power_display = $power_source === undefined ? 'N/A' : $power_source ? 'ROCKET' : 'GROUND';
 	
 	$: relayStatusOutdated = Date.now() - timestamps.relay_status > 5000;
 	$: combustionControlStatusOutdated = Date.now() - timestamps.combustion_control_status > 5000;
@@ -546,6 +554,28 @@
 		>
 			CAL
 		</button>
+	</div>
+
+	<div class="battery_voltage  battery {batteryOutdated ? 'outdated' : ''}">
+		<p>{battery_display}</p>
+	</div>
+
+	<div class="power_source_slider battery {batteryOutdated  ? 'outdated' : ''}">
+		<SlideToggle
+			name="power_source_slider"
+			active="bg-primary-500 dark:bg-primary-500"
+			size="sm"
+			bind:checked={$power_source}
+			on:click={(e) =>
+				handleSliderChange(
+					e,
+					'NODE_DMB',
+					'RSC_POWER_TRANSITION_ONBOARD',
+					'RSC_POWER_TRANSITION_EXTERNAL'
+				)}
+		>
+			{power_display}
+		</SlideToggle>
 	</div>
 
 	<!-- Render different buttons based on the current state -->
