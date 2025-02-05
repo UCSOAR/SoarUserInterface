@@ -556,6 +556,10 @@
 		</button>
 	</div>
 
+	<div class="mev_status combustion_control_status {combustionControlStatusOutdated ? 'outdated' : ''}">
+		<p>{mev_display}</p>
+	</div>
+
 	<div class="battery_voltage  battery {batteryOutdated ? 'outdated' : ''}">
 		<p>{battery_display}</p>
 	</div>
