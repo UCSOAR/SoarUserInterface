@@ -230,22 +230,47 @@ class SerialHandler():
 
         return True
     
-    def send_serial_control_message(self, message: bytes):
+    def send_serial_control_message(self, control_type: str, target: str, control_params: dict, source_sequence_number: int) -> bool:
         """
         Sends a control message over the serial port.
 
         Args:
-            message (bytes):
-                The message to be sent. TODO Generalize this function. 
+            control_type (str):
+                The type of control message to send.
+            target (str):
+                The target node for the control message.
+            control_params (dict):
+                Parameters for the control message.
+            source_sequence_number (int):
+                Sequence number for message tracking.
 
         Returns:
             bool: 
                 True if the message was successfully sent, False otherwise.
         """
+        try:
+            control_message = ProtobufParser.create_control_proto(control_type, target, control_params, source_sequence_number)
+        except KeyError:
+            logger.error(f"Attempting to send invalid control type {control_type}")
+            return False
 
-        buf = message
+        if control_message is None:
+            logger.warning(f"Cannot send control message {control_type} to {target}")
+            return False
+
+        buf = control_message.SerializeToString()
+        logger.debug(f"Sending control message {control_type} to {target}")
+
         encBuf = Codec.Encode(buf, len(buf), ProtoCore.MessageID.MSG_CONTROL)
-        self.serial_port.write(encBuf)
+        target_enum = utl.get_node_from_str(target)
+        if (target_enum == ProtoCore.NODE_DMB or target_enum == ProtoCore.Node.NODE_PBB) and self.port == RADIO_SERIAL_PORT:
+            self.serial_port.write(encBuf)
+        if (target_enum == ProtoCore.NODE_RCU or target_enum == ProtoCore.Node.NODE_SOB) and self.port == UART_SERIAL_PORT:
+            self.serial_port.write(encBuf)
+        else:
+            logger.warning(f"Invalid target {target} for port {self.port}")
+            return False
+
         return True
 
 # Procedures =======================================================================================

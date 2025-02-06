@@ -113,7 +113,7 @@ class DatabaseHandler():
     @staticmethod
     def _handle_board_status_command_callback(document: MessageData):
         """
-        Whenever a new entry is created in the BoardPing 
+        Whenever a new entry is created in the BoardStatus 
         collection, this function is called to handle the
         command and forward it to the serial port.
 

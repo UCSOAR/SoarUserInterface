@@ -19,7 +19,8 @@
 		subscribeToCollections,
 		writeStateChange,
 		writeArbitraryCommand,
-		writeLoadCellCommand
+		writeLoadCellCommand,
+		writeControlMessage
 	} = usePocketbaseHook;
 
 	const {
@@ -532,49 +533,49 @@
 
 	<div class="fcb_ping_button">
 		<button type="button" class="btn btn-sm small-button" 
-				on:click={() => writeArbitraryCommand('FCB_BOARD','PINGCOMMAND')}>
+				on:click={() => writeControlMessage('FCB_BOARD','PINGCOMMAND')}>
 			<img src="/icons/grey-reload-icon.png" alt="Reload" />
 		</button>
 	</div>
 
 	<div class="pbb_ping_button">
 		<button type="button" class="btn btn-sm small-button" 
-				on:click={() => writeArbitraryCommand('PBB_BOARD','PINGCOMMAND')}>
+				on:click={() => writeControlMessage('PBB_BOARD','PINGCOMMAND')}>
 			<img src="/icons/grey-reload-icon.png" alt="Reload" />
 		</button>
 	</div>
 
 	<div class="daq_ping_button">
 		<button type="button" class="btn btn-sm small-button" 
-				on:click={() => writeArbitraryCommand('DAQ_BOARD','PINGCOMMAND')}>
+				on:click={() => writeControlMessage('DAQ_BOARD','PINGCOMMAND')}>
 			<img src="/icons/grey-reload-icon.png" alt="Reload" />
 		</button>
 	</div>
 
 	<div class="fsb_ping_button">
 		<button type="button" class="btn btn-sm small-button" 
-				on:click={() => writeArbitraryCommand('FSB_BOARD','PINGCOMMAND')}>
+				on:click={() => writeControlMessage('FSB_BOARD','PINGCOMMAND')}>
 			<img src="/icons/grey-reload-icon.png" alt="Reload" />
 		</button>
 	</div>
 
 	<div class="bms_ping_button">
 		<button type="button" class="btn btn-sm small-button" 
-				on:click={() => writeArbitraryCommand('BMS_BOARD','PINGCOMMAND')}>
+				on:click={() => writeControlMessage('BMS_BOARD','PINGCOMMAND')}>
 			<img src="/icons/grey-reload-icon.png" alt="Reload" />
 		</button>
 	</div>
 
 	<div class="cib_ping_button">
 		<button type="button" class="btn btn-sm small-button" 
-				on:click={() => writeArbitraryCommand('CIB_BOARD','PINGCOMMAND')}>
+				on:click={() => writeControlMessage('CIB_BOARD','PINGCOMMAND')}>
 			<img src="/icons/grey-reload-icon.png" alt="Reload" />
 		</button>
 	</div>
 
 	<div class="lrb_ping_button">
 		<button type="button" class="btn btn-sm small-button" 
-				on:click={() => writeArbitraryCommand('LRB_BOARD','PINGCOMMAND')}>
+				on:click={() => writeControlMessage('LRB_BOARD','PINGCOMMAND')}>
 			<img src="/icons/grey-reload-icon.png" alt="Reload" />
 		</button>
 	</div>
@@ -588,23 +589,23 @@
 	</div>
 
 	<div class="daq_status board_status {boardStatusOutdated ? 'outdated' : ''}">
-		<p>{pbb_status_display}</p>
+		<p>{daq_status_display}</p>
 	</div>
 
 	<div class="fsb_status board_status {boardStatusOutdated ? 'outdated' : ''}">
-		<p>{pbb_status_display}</p>
+		<p>{fsb_status_display}</p>
 	</div>
 
 	<div class="bms_status board_status {boardStatusOutdated ? 'outdated' : ''}">
-		<p>{pbb_status_display}</p>
+		<p>{bms_status_display}</p>
 	</div>
 
 	<div class="cib_status board_status {boardStatusOutdated ? 'outdated' : ''}">
-		<p>{pbb_status_display}</p>
+		<p>{cib_status_display}</p>
 	</div>
 
 	<div class="lrb_status board_status {boardStatusOutdated ? 'outdated' : ''}">
-		<p>{pbb_status_display}</p>
+		<p>{lrb_status_display}</p>
 	</div>
 
 	<div class="rcu_tc1 rcu_temp {rcuTempOutdated ? 'outdated' : ''}">

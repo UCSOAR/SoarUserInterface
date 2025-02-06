@@ -50,6 +50,13 @@ export const usePocketbase = (timestamps: Timestamps, stores: Stores) => {
 		});
 	};
 
+	const writeControlMessage = async (target: string, command: string) => {
+		await pocketbase.collection('CommandMessage').create({
+			target,
+			command
+		});
+	};
+
 	const subscribeToCollections = () => {
 		// Subscribe to changes in the 'RelayStatus' collection
 		pocketbase.collection('RelayStatus').subscribe('*', (e) => {
@@ -208,6 +215,7 @@ export const usePocketbase = (timestamps: Timestamps, stores: Stores) => {
 		writeStateChange,
 		writeArbitraryCommand: writeCommandMessage,
 		writeLoadCellCommand,
-		subscribeToCollections
+		subscribeToCollections,
+		writeControlMessage
 	};
 };
