@@ -32,12 +32,14 @@
 	const {
 		ac2_open,
 
-        pbv1_open,
-        pbv2_open,
-        pbv3_open,
-        pbv4_open,
-        pbv5_open,
-        pbv6_open,
+        pv1_open,
+        pv2_open,
+        pv3_open,
+        pv4_open,
+        pv5_open,
+        pv6_open,
+		pv7_open,
+		pv8_open,
 
         sol5_open,
         sol6_open,
@@ -150,12 +152,12 @@
 
 	$: ac2_display = $ac2_open === undefined ? 'AC2 N/A' : $ac2_open ? 'ON' : 'OFF';
 
-	$: pbv1_display = $pbv1_open === undefined ? 'pbv1 N/A' : $pbv1_open ? 'OPEN' : 'CLOSED';
-	$: pbv2_display = $pbv2_open === undefined ? 'pbv2 N/A' : $pbv2_open ? 'OPEN' : 'CLOSED';
-	$: pbv3_display = $pbv3_open === undefined ? 'pbv3 N/A' : $pbv3_open ? 'OPEN' : 'CLOSED';
-	$: pbv4_display = $pbv4_open === undefined ? 'pbv4 N/A' : $pbv4_open ? 'CLOSED' : 'OPEN';
-    $: pbv5_display = $pbv5_open === undefined ? 'pbv5 N/A' : $pbv5_open ? 'CLOSED' : 'OPEN';
-    $: pbv6_display = $pbv6_open === undefined ? 'pbv6 N/A' : $pbv6_open ? 'CLOSED' : 'OPEN';
+	$: pv1_display = $pv1_open === undefined ? 'pv1 N/A' : $pv1_open ? 'OPEN' : 'CLOSED';
+	$: pv2_display = $pv2_open === undefined ? 'pv2 N/A' : $pv2_open ? 'OPEN' : 'CLOSED';
+	$: pv3_display = $pv3_open === undefined ? 'pv3 N/A' : $pv3_open ? 'OPEN' : 'CLOSED';
+	$: pv4_display = $pv4_open === undefined ? 'pv4 N/A' : $pv4_open ? 'CLOSED' : 'OPEN';
+    $: pv5_display = $pv5_open === undefined ? 'pv5 N/A' : $pv5_open ? 'CLOSED' : 'OPEN';
+    $: pv6_display = $pv6_open === undefined ? 'pv6 N/A' : $pv6_open ? 'CLOSED' : 'OPEN';
 
 	$: sol5_display = $sol5_open === undefined ? 'sol5 N/A' : $sol5_open ? 'OPEN' : 'CLOSE';
 	$: sol6_display = $sol6_open === undefined ? 'sol6 N/A' : $sol6_open ? 'OPEN' : 'CLOSE';
@@ -194,7 +196,10 @@
 	$: mev_display = $mev_open === undefined ? 'N/A' : $mev_open ? 'OPEN' : 'CLOSED';
 	$: battery_display = $battery_voltage === undefined ? 'N/A' : $battery_voltage;
 	$: power_display = $power_source === undefined ? 'N/A' : $power_source ? 'ROCKET' : 'GROUND';
-	
+
+	$: pv7_display = $pv7_open === undefined ? 'N/A' : $pv7_open ? 'OPEN' : 'CLOSE';
+	$: pv8_display = $pv8_open === undefined ? 'N/A' : $pv8_open ? 'OPEN' : 'CLOSE';
+
 	$: relayStatusOutdated = Date.now() - timestamps.relay_status > 5000;
 	$: combustionControlStatusOutdated = Date.now() - timestamps.combustion_control_status > 5000;
 	$: rcuTempOutdated = Date.now() - timestamps.rcu_temp > 5000;
@@ -272,75 +277,75 @@
 		</SlideToggle>
 	</div>
 
-	<div class="pbv1_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+	<div class="pv1_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="pbv1_slider"
+			name="pv1_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
-			bind:checked={$pbv1_open}
-			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PBV1', 'RCU_CLOSE_PBV1')}
+			bind:checked={$pv1_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV1', 'RCU_CLOSE_PV1')}
 		>
-			{pbv1_display}
+			{pv1_display}
 		</SlideToggle>
 	</div>
 
-	<div class="pbv2_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+	<div class="pv2_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="pbv2_slider"
+			name="pv2_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
-			bind:checked={$pbv2_open}
-			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PBV2', 'RCU_CLOSE_PBV2')}
+			bind:checked={$pv2_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV2', 'RCU_CLOSE_PV2')}
 		>
-			{pbv2_display}
+			{pv2_display}
 		</SlideToggle>
 	</div>
 
-	<div class="pbv3_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+	<div class="pv3_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="pbv3_slider"
+			name="pv3_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
-			bind:checked={$pbv3_open}
-			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PBV3', 'RCU_CLOSE_PBV3')}
+			bind:checked={$pv3_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV3', 'RCU_CLOSE_PV3')}
 		>
-			{pbv3_display}
+			{pv3_display}
 		</SlideToggle>
 	</div>
 
-	<div class="pbv4_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+	<div class="pv4_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="pbv4_slider"
+			name="pv4_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
-			bind:checked={$pbv4_open}
-			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PBV4', 'RCU_CLOSE_PBV4')}
+			bind:checked={$pv4_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV4', 'RCU_CLOSE_PV4')}
 		>
-			{pbv4_display}
+			{pv4_display}
 		</SlideToggle>
 	</div>
 
-    <div class="pbv5_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+    <div class="pv5_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="pbv5_slider"
+			name="pv5_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
-			bind:checked={$pbv5_open}
-			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PBV5', 'RCU_CLOSE_PBV5')}
+			bind:checked={$pv5_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV5', 'RCU_CLOSE_PV5')}
 		>
-			{pbv5_display}
+			{pv5_display}
 		</SlideToggle>
 	</div>
 
-    <div class="pbv6_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+    <div class="pv6_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="pbv6_slider"
+			name="pv6_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
-			bind:checked={$pbv6_open}
-			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PBV6', 'RCU_CLOSE_PBV6')}
+			bind:checked={$pv6_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV6', 'RCU_CLOSE_PV6')}
 		>
-			{pbv6_display}
+			{pv6_display}
 		</SlideToggle>
 	</div>
 	
@@ -482,6 +487,30 @@
 
 	<div class="timer_remaining heartbeat {heartbeatOutdated ? 'outdated' : ''}">
 		<p>{timer_remaining_display}</p>
+	</div>
+
+	<div class="pv7_display">
+		<SlideToggle
+			name="pv7_slider"
+			active="bg-primary-500 dark:bg-primary-500"
+			size="sm"
+			bind:checked={$pv7_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV7', 'RCU_CLOSE_PV7')}
+		>
+			{pv7_display}
+		</SlideToggle>
+	</div>
+
+	<div class="pv8_display">
+		<SlideToggle
+			name="pv8_slider"
+			active="bg-primary-500 dark:bg-primary-500"
+			size="sm"
+			bind:checked={$pv8_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV8', 'RCU_CLOSE_PV8')}
+		>
+			{pv8_display}
+		</SlideToggle>
 	</div>
 
 	{#if $currentState === "RS_IGNITION" || $currentState === "RS_TEST" || $currentState === "RS_ABORT" || $currentState === "RS_LAUNCH" || $currentState === "RS_BURN" || $currentState === "RS_COAST" || $currentState === "RS_RECOVERY"}
