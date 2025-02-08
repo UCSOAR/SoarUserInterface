@@ -30,42 +30,53 @@
 
 	// Destructure stores for later use
 	const {
-		ac1_open,
-        pbv1_open,
-        pbv2_open,
-        pbv3_open,
-        pbv4_open,
+		ac2_open,
+
+        pv1_open,
+        pv2_open,
+        pv3_open,
+        pv4_open,
+        pv5_open,
+        pv6_open,
+		pv7_open,
+		pv8_open,
+
         sol5_open,
         sol6_open,
         sol7_open,
         sol8a_open,
         sol8b_open,
-        box1_on,
-        box2_on,
-        vent_open,
-        drain_open,
-        mev_open,
-        rcu_tc1_temperature,
-        rcu_tc2_temperature,
-        battery_voltage,
-		power_source,
-		upper_pv_pressure,
-		rocket_mass,
+
+        tc1_temperature,
+        tc2_temperature,
+        tc3_temperature,
+        tc4_temperature,
+        tc5_temperature,
+        tc6_temperature,
+
 		nos1_mass,
 		nos2_mass,
-		ib_pressure,
-		lower_pv_pressure,
-		pv_temperature,
+        
 		pt1_pressure,
 		pt2_pressure,
 		pt3_pressure,
 		pt4_pressure,
-		sob_tc1_temperature,
-		sob_tc2_temperature,
+        pt5_pressure,
+		pt6_pressure,
+		pt7_pressure,
+		pt8_pressure,
+
+		box1_on,
+        box2_on,
+
 		system_state,
 		timer_state,
 		timer_period,
-		timer_remaining
+		timer_remaining,
+
+		mev_open, 
+		power_source,
+		battery_voltage
 	} = stores;
 	
 	onMount(() => {
@@ -139,58 +150,55 @@
 		};
 	});
 
-	$: ac1_display = $ac1_open === undefined ? 'N/A' : $ac1_open ? 'ON' : 'OFF';
+	$: ac2_display = $ac2_open === undefined ? 'AC2 N/A' : $ac2_open ? 'ON' : 'OFF';
 
-	$: pbv1_display = $pbv1_open === undefined ? 'N/A' : $pbv1_open ? 'OPEN' : 'CLOSE';
-	$: pbv2_display = $pbv2_open === undefined ? 'N/A' : $pbv2_open ? 'OPEN' : 'CLOSE';
-	$: pbv3_display = $pbv3_open === undefined ? 'N/A' : $pbv3_open ? 'OPEN' : 'CLOSE';
-	$: pbv4_display = $pbv4_open === undefined ? 'N/A' : $pbv4_open ? 'CLOSE' : 'OPEN';
+	$: pv1_display = $pv1_open === undefined ? 'pv1 N/A' : $pv1_open ? 'OPEN' : 'CLOSED';
+	$: pv2_display = $pv2_open === undefined ? 'pv2 N/A' : $pv2_open ? 'OPEN' : 'CLOSED';
+	$: pv3_display = $pv3_open === undefined ? 'pv3 N/A' : $pv3_open ? 'OPEN' : 'CLOSED';
+	$: pv4_display = $pv4_open === undefined ? 'pv4 N/A' : $pv4_open ? 'CLOSED' : 'OPEN';
+    $: pv5_display = $pv5_open === undefined ? 'pv5 N/A' : $pv5_open ? 'CLOSED' : 'OPEN';
+    $: pv6_display = $pv6_open === undefined ? 'pv6 N/A' : $pv6_open ? 'CLOSED' : 'OPEN';
 
-	$: sol5_display = $sol5_open === undefined ? 'N/A' : $sol5_open ? 'OPEN' : 'CLOSE';
-	$: sol6_display = $sol6_open === undefined ? 'N/A' : $sol6_open ? 'OPEN' : 'CLOSE';
-	$: sol7_display = $sol7_open === undefined ? 'N/A' : $sol7_open ? 'OPEN' : 'CLOSE';
-	$: sol8a_display = $sol8a_open === undefined ? 'N/A' : $sol8a_open ? 'OPEN' : 'CLOSE';
-	$: sol8b_display = $sol8b_open === undefined ? 'N/A' : $sol8b_open ? 'OPEN' : 'CLOSE';
+	$: sol5_display = $sol5_open === undefined ? 'sol5 N/A' : $sol5_open ? 'OPEN' : 'CLOSE';
+	$: sol6_display = $sol6_open === undefined ? 'sol6 N/A' : $sol6_open ? 'OPEN' : 'CLOSE';
+	$: sol7_display = $sol7_open === undefined ? 'sol7 N/A' : $sol7_open ? 'OPEN' : 'CLOSE';
+	$: sol8a_display = $sol8a_open === undefined ? 'sol8a N/A' : $sol8a_open ? 'OPEN' : 'CLOSE';
+	$: sol8b_display = sol8b_open === undefined ? 'sol8b N/A' : $sol8b_open ? 'OPEN' : 'CLOSE';
 
-	$: box1_display = $box1_on === undefined ? 'N/A' : $box1_on ? 'LIVE' : 'DEAD';
-	$: box2_display = $box2_on === undefined ? 'N/A' : $box2_on ? 'LIVE' : 'DEAD';
-
-	$: vent_display = $vent_open === undefined ? 'N/A' : $vent_open ? 'OPEN' : 'CLOSED';
-	$: drain_display = $drain_open === undefined ? 'N/A' : $drain_open ? 'OPEN' : 'CLOSED';
-
-	$: rcu_tc1_display = $rcu_tc1_temperature === undefined ? 'N/A' : $rcu_tc1_temperature;
-	$: rcu_tc2_display = $rcu_tc2_temperature === undefined ? 'N/A' : $rcu_tc2_temperature;
-
-	$: mev_display = $mev_open === undefined ? 'N/A' : $mev_open ? 'OPEN' : 'CLOSED';
-
-	$: battery_display = $battery_voltage === undefined ? 'N/A' : $battery_voltage;
-	$: power_display = $power_source === undefined ? 'N/A' : $power_source ? 'ROCKET' : 'GROUND';
-
-	$: upper_pv_display = $upper_pv_pressure === undefined ? 'DC' : $upper_pv_pressure;
-
-	$: rocket_mass_display = $rocket_mass === undefined ? 'N/A' : Number($rocket_mass).toFixed(2);
+	$: tc1_display = $tc1_temperature === undefined ? 'N/A' : $tc1_temperature;
+	$: tc2_display = $tc2_temperature === undefined ? 'N/A' : $tc2_temperature;
+    $: tc3_display = $tc3_temperature === undefined ? 'N/A' : $tc3_temperature;
+    $: tc4_display = $tc4_temperature === undefined ? 'N/A' : $tc4_temperature;
+    $: tc5_display = $tc5_temperature === undefined ? 'N/A' : $tc5_temperature;
+	$: tc6_display = $tc6_temperature === undefined ? 'N/A' : $tc6_temperature;
 
 	$: nos1_mass_display = $nos1_mass === undefined ? 'N/A' : Number($nos1_mass).toFixed(2);
 	$: nos2_mass_display = $nos2_mass === undefined ? 'N/A' : Number($nos2_mass).toFixed(2);
-
-	$: ib_pressure_display = $ib_pressure === undefined ? 'N/A' : $ib_pressure;
-	$: lower_pv_display = $lower_pv_pressure === undefined ? 'N/A' : $lower_pv_pressure;
-
-	$: pv_temperature_display = $pv_temperature === undefined ? 'N/A' : $pv_temperature;
 
 	$: pt1_pressure_display = $pt1_pressure === undefined ? 'N/A' : $pt1_pressure;
 	$: pt2_pressure_display = $pt2_pressure === undefined ? 'N/A' : $pt2_pressure;
 	$: pt3_pressure_display = $pt3_pressure === undefined ? 'N/A' : $pt3_pressure;
 	$: pt4_pressure_display = $pt4_pressure === undefined ? 'N/A' : $pt4_pressure;
-
-	$: sob_tc1_display = $sob_tc1_temperature === undefined ? 'N/A' : $sob_tc1_temperature;
-	$: sob_tc2_display = $sob_tc2_temperature === undefined ? 'N/A' : $sob_tc2_temperature;
+    $: pt5_pressure_display = $pt5_pressure === undefined ? 'N/A' : $pt5_pressure;
+	$: pt6_pressure_display = $pt6_pressure === undefined ? 'N/A' : $pt6_pressure;
+	$: pt7_pressure_display = $pt7_pressure === undefined ? 'N/A' : $pt7_pressure;
+	$: pt8_pressure_display = $pt8_pressure === undefined ? 'N/A' : $pt8_pressure;
 
 	$: system_state_display = $system_state === undefined ? 'N/A' : $system_state.replace('SYS_', '');
 
 	$: timer_state_display = $timer_state === undefined ? 'N/A' : $timer_state;
 	$: timer_period_display = $timer_period === undefined ? 'N/A' : ($timer_period / 1000).toFixed(0); // Convert to seconds
 	$: timer_remaining_display = $timer_remaining === undefined ? 'N/A' : ($timer_remaining / 1000).toFixed(0); // Convert to seconds
+
+	$: box1_display = $box1_on === undefined ? 'N/A' : $box1_on ? 'LIVE' : 'DEAD';
+	$: box2_display = $box2_on === undefined ? 'N/A' : $box2_on ? 'LIVE' : 'DEAD';
+
+	$: mev_display = $mev_open === undefined ? 'N/A' : $mev_open ? 'OPEN' : 'CLOSED';
+	$: battery_display = $battery_voltage === undefined ? 'N/A' : $battery_voltage;
+	$: power_display = $power_source === undefined ? 'N/A' : $power_source ? 'ROCKET' : 'GROUND';
+
+	$: pv7_display = $pv7_open === undefined ? 'N/A' : $pv7_open ? 'OPEN' : 'CLOSE';
+	$: pv8_display = $pv8_open === undefined ? 'N/A' : $pv8_open ? 'OPEN' : 'CLOSE';
 
 	$: relayStatusOutdated = Date.now() - timestamps.relay_status > 5000;
 	$: combustionControlStatusOutdated = Date.now() - timestamps.combustion_control_status > 5000;
@@ -201,7 +209,6 @@
 	$: pbbPressureOutdated = Date.now() - timestamps.pbb_pressure > 5000;
 	$: pbbTemperatureOutdated = Date.now() - timestamps.pbb_temperature > 5000;
 	$: rcuPressureOutdated = Date.now() - timestamps.rcu_pressure > 5000;
-	$: sobTemperatureOutdated = Date.now() - timestamps.sob_temperature > 5000;
 	$: sysStateOutdated = Date.now() - timestamps.sys_state > 5000;
 	$: heartbeatOutdated = Date.now() - timestamps.heartbeat > 5000;
 
@@ -252,68 +259,93 @@
 		await handleSliderChange(e, 'NODE_RCU', 'RCU_IGNITE_PAD_BOX1', 'RCU_KILL_BOX1');
 		await handleSliderChange(e, 'NODE_RCU', 'RCU_KILL_PAD_BOX2', 'RCU_IGNITE_PAD_BOX2');
 	}
+
 </script>
 
 <div class="container">
 	<Diagram />
 
-	<div class="ac1_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+	<div class="ac2_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="ac1_slider"
+			name="ac2_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
-			bind:checked={$ac1_open}
-			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_AC1', 'RCU_CLOSE_AC1')}
+			bind:checked={$ac2_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_AC2', 'RCU_CLOSE_AC2')}
 		>
-			{ac1_display}
+			{ac2_display}
 		</SlideToggle>
 	</div>
 
-	<div class="pbv1_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+	<div class="pv1_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="pbv1_slider"
+			name="pv1_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
-			bind:checked={$pbv1_open}
-			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PBV1', 'RCU_CLOSE_PBV1')}
+			bind:checked={$pv1_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV1', 'RCU_CLOSE_PV1')}
 		>
-			{pbv1_display}
+			{pv1_display}
 		</SlideToggle>
 	</div>
 
-	<div class="pbv2_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+	<div class="pv2_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="pbv2_slider"
+			name="pv2_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
-			bind:checked={$pbv2_open}
-			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PBV2', 'RCU_CLOSE_PBV2')}
+			bind:checked={$pv2_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV2', 'RCU_CLOSE_PV2')}
 		>
-			{pbv2_display}
+			{pv2_display}
 		</SlideToggle>
 	</div>
 
-	<div class="pbv3_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+	<div class="pv3_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="pbv3_slider"
+			name="pv3_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
-			bind:checked={$pbv3_open}
-			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PBV3', 'RCU_CLOSE_PBV3')}
+			bind:checked={$pv3_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV3', 'RCU_CLOSE_PV3')}
 		>
-			{pbv3_display}
+			{pv3_display}
 		</SlideToggle>
 	</div>
 
-	<div class="pbv4_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+	<div class="pv4_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="pbv4_slider"
+			name="pv4_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
-			bind:checked={$pbv4_open}
-			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PBV4', 'RCU_CLOSE_PBV4')}
+			bind:checked={$pv4_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV4', 'RCU_CLOSE_PV4')}
 		>
-			{pbv4_display}
+			{pv4_display}
+		</SlideToggle>
+	</div>
+
+    <div class="pv5_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+		<SlideToggle
+			name="pv5_slider"
+			active="bg-primary-500 dark:bg-primary-500"
+			size="sm"
+			bind:checked={$pv5_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV5', 'RCU_CLOSE_PV5')}
+		>
+			{pv5_display}
+		</SlideToggle>
+	</div>
+
+    <div class="pv6_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+		<SlideToggle
+			name="pv6_slider"
+			active="bg-primary-500 dark:bg-primary-500"
+			size="sm"
+			bind:checked={$pv6_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV6', 'RCU_CLOSE_PV6')}
+		>
+			{pv6_display}
 		</SlideToggle>
 	</div>
 	
@@ -377,45 +409,107 @@
 		</SlideToggle>
 	</div>
 
-	<div class="vent_slider combustion_control_status {combustionControlStatusOutdated ? 'outdated' : ''}">
+	<div class="tc1 rcu_temp {rcuTempOutdated ? 'outdated' : ''}">
+		<p>{tc1_display}</p>
+	</div>
+
+	<div class="tc2 rcu_temp {rcuTempOutdated ? 'outdated' : ''}">
+		<p>{tc2_display}</p>
+	</div>
+
+    <div class="tc3 rcu_temp {rcuTempOutdated ? 'outdated' : ''}">
+		<p>{tc3_display}</p>
+	</div>
+
+    <div class="tc4 rcu_temp {rcuTempOutdated ? 'outdated' : ''}">
+		<p>{tc4_display}</p>
+	</div>
+
+    <div class="tc5 rcu_temp {rcuTempOutdated ? 'outdated' : ''}">
+		<p>{tc5_display}</p>
+	</div>
+
+	<div class="tc6 rcu_temp {rcuTempOutdated ? 'outdated' : ''}">
+		<p>{tc6_display}</p>
+	</div>
+
+	<div class="nos1 nos_load_cell {nosLoadCellOutdated ? 'outdated' : ''}">
+		<p>{nos1_mass_display}</p>
+	</div>
+
+	<div class="nos2 nos_load_cell {nosLoadCellOutdated ? 'outdated' : ''}">
+		<p>{nos2_mass_display}</p>
+	</div>
+
+	<div class="pt1_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
+		<p>{pt1_pressure_display}</p>
+	</div>
+
+	<div class="pt2_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
+		<p>{pt2_pressure_display}</p>
+	</div>
+
+	<div class="pt3_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
+		<p>{pt3_pressure_display}</p>
+	</div>
+
+	<div class="pt4_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
+		<p>{pt4_pressure_display}</p>
+	</div>
+
+    <div class="pt5_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
+		<p>{pt5_pressure_display}</p>
+	</div>
+
+	<div class="pt6_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
+		<p>{pt6_pressure_display}</p>
+	</div>
+
+	<div class="pt7_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
+		<p>{pt7_pressure_display}</p>
+	</div>
+
+	<div class="pt8_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
+		<p>{pt8_pressure_display}</p>
+	</div>
+
+	<div class="system_state sys_state {sysStateOutdated ? 'outdated' : ''}">
+		<p>{system_state_display}</p>
+	</div>
+
+	<div class="timer_state heartbeat {heartbeatOutdated ? 'outdated' : ''}">
+		<p>{timer_state_display}</p>
+	</div>
+
+	<div class="timer_period heartbeat {heartbeatOutdated ? 'outdated' : ''}">
+		<p>{timer_period_display}</p>
+	</div>
+
+	<div class="timer_remaining heartbeat {heartbeatOutdated ? 'outdated' : ''}">
+		<p>{timer_remaining_display}</p>
+	</div>
+
+	<div class="pv7_display">
 		<SlideToggle
-			name="vent_slider"
+			name="pv7_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
-			bind:checked={$vent_open}
-			on:click={(e) => handleSliderChange(e, 'NODE_DMB', 'RSC_OPEN_VENT', 'RSC_CLOSE_VENT')}
+			bind:checked={$pv7_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV7', 'RCU_CLOSE_PV7')}
 		>
-			{vent_display}
+			{pv7_display}
 		</SlideToggle>
 	</div>
 
-	<div class="drain_slider combustion_control_status {combustionControlStatusOutdated ? 'outdated' : ''}">
+	<div class="pv8_display">
 		<SlideToggle
-			name="drain_slider"
+			name="pv8_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
-			bind:checked={$drain_open}
-			on:click={(e) => handleSliderChange(e, 'NODE_DMB', 'RSC_OPEN_DRAIN', 'RSC_CLOSE_DRAIN')}
+			bind:checked={$pv8_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_RCU', 'RCU_OPEN_PV8', 'RCU_CLOSE_PV8')}
 		>
-			{drain_display}
-		</SlideToggle>
-	</div>
-
-	<div class="power_source_slider battery {batteryOutdated  ? 'outdated' : ''}">
-		<SlideToggle
-			name="power_source_slider"
-			active="bg-primary-500 dark:bg-primary-500"
-			size="sm"
-			bind:checked={$power_source}
-			on:click={(e) =>
-				handleSliderChange(
-					e,
-					'NODE_DMB',
-					'RSC_POWER_TRANSITION_ONBOARD',
-					'RSC_POWER_TRANSITION_EXTERNAL'
-				)}
-		>
-			{power_display}
+			{pv8_display}
 		</SlideToggle>
 	</div>
 
@@ -484,71 +578,11 @@
 			type="button" 
 			class="btn btn-sm variant-filled-error" 
 			on:click={() => {
-				writeLoadCellCommand("NOS2", "CANCEL", 0);	
+				writeLoadCellCommand("NOS2", "CANCEL", 0);
 				resumeConfirmRemoveWeight("NOS2");}}
 		>
 			CAL
 		</button>
-	</div>
-
-	<div class="rail_tare_button">
-		<button 
-			type="button" 
-			class="btn btn-sm variant-filled-secondary" 
-			on:click={() => performTare("LAUNCHRAIL")}
-		>
-			TARE
-		</button>
-	</div>
-
-	<div class="rail_cal_button">
-		<button 
-			type="button" 
-			class="btn btn-sm variant-filled-error" 
-			on:click={() => { 
-				writeLoadCellCommand("LAUNCHRAIL", "CANCEL", 0);
-				resumeConfirmRemoveWeight("LAUNCHRAIL");}}
-		>
-			CAL
-		</button>
-	</div>
-
-	<div class="rcu_tc1 rcu_temp {rcuTempOutdated ? 'outdated' : ''}">
-		<p>{rcu_tc1_display}</p>
-	</div>
-
-	<div class="rcu_tc2 rcu_temp {rcuTempOutdated ? 'outdated' : ''}">
-		<p>{rcu_tc2_display}</p>
-	</div>
-
-	<div class="nos1 nos_load_cell {nosLoadCellOutdated ? 'outdated' : ''}">
-		<p>{nos1_mass_display}</p>
-	</div>
-
-	<div class="nos2 nos_load_cell {nosLoadCellOutdated ? 'outdated' : ''}">
-		<p>{nos2_mass_display}</p>
-	</div>
-
-	<div class="pt1_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
-		<p>{pt1_pressure_display}</p>
-	</div>
-
-	<div class="pt2_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
-		<p>{pt2_pressure_display}</p>
-	</div>
-
-	<div class="pt3_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
-		<p>{pt3_pressure_display}</p>
-	</div>
-
-	<div class="pt4_pressure rcu_pressure {rcuPressureOutdated ? 'outdated' : ''}">
-		<p>{pt4_pressure_display}</p>
-	</div>
-
-	<div class="box1_continuity">
-	</div>
-
-	<div class="box2_continuity">
 	</div>
 
 	<div class="mev_status combustion_control_status {combustionControlStatusOutdated ? 'outdated' : ''}">
@@ -559,48 +593,22 @@
 		<p>{battery_display}</p>
 	</div>
 
-	<div class="upper_pv_pressure">
-		<p>{upper_pv_display}</p>
-	</div>
-
-	<div class="rocket_mass launch_rail_load_cell {launchRailLoadCellOutdated ? 'outdated' : ''}">
-		<p>{rocket_mass_display}</p>
-	</div>
-
-	<div class="ib_pressure pbb_pressure {pbbPressureOutdated ? 'outdated' : ''}">
-		<p>{ib_pressure_display}</p>
-	</div>
-
-	<div class="lower_pv_pressure pbb_pressure {pbbPressureOutdated ? 'outdated' : ''}">
-		<p>{lower_pv_display}</p>
-	</div>
-
-	<div class="pv_temperature pbb_temperature {pbbTemperatureOutdated ? 'outdated' : ''}">
-		<p>{pv_temperature_display}</p>
-	</div>
-
-	<div class="sob_tc1 sob_temperature {sobTemperatureOutdated ? 'outdated' : ''}">
-		<p>{sob_tc1_display}</p>
-	</div>
-
-	<div class="sob_tc2 sob_temperature {sobTemperatureOutdated ? 'outdated' : ''}">
-		<p>{sob_tc2_display}</p>
-	</div>
-
-	<div class="system_state sys_state {sysStateOutdated ? 'outdated' : ''}">
-		<p>{system_state_display}</p>
-	</div>
-
-	<div class="timer_state heartbeat {heartbeatOutdated ? 'outdated' : ''}">
-		<p>{timer_state_display}</p>
-	</div>
-
-	<div class="timer_period heartbeat {heartbeatOutdated ? 'outdated' : ''}">
-		<p>{timer_period_display}</p>
-	</div>
-
-	<div class="timer_remaining heartbeat {heartbeatOutdated ? 'outdated' : ''}">
-		<p>{timer_remaining_display}</p>
+	<div class="power_source_slider battery {batteryOutdated  ? 'outdated' : ''}">
+		<SlideToggle
+			name="power_source_slider"
+			active="bg-primary-500 dark:bg-primary-500"
+			size="sm"
+			bind:checked={$power_source}
+			on:click={(e) =>
+				handleSliderChange(
+					e,
+					'NODE_DMB',
+					'RSC_POWER_TRANSITION_ONBOARD',
+					'RSC_POWER_TRANSITION_EXTERNAL'
+				)}
+		>
+			{power_display}
+		</SlideToggle>
 	</div>
 
 	<!-- Render different buttons based on the current state -->
