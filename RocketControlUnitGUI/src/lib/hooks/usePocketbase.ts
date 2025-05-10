@@ -50,6 +50,13 @@ export const usePocketbase = (timestamps: Timestamps, stores: Stores) => {
 		});
 	};
 
+	const writeControlMessage = async (target: string, command: string) => {
+		await pocketbase.collection('CommandMessage').create({
+			target,
+			command
+		});
+	};
+
 	const subscribeToCollections = () => {
 		// Subscribe to changes in the 'RelayStatus' collection
 		pocketbase.collection('RelayStatus').subscribe('*', (e) => {
@@ -187,6 +194,19 @@ export const usePocketbase = (timestamps: Timestamps, stores: Stores) => {
 
 			timestamps.heartbeat = Date.now();
 		});
+
+		// Subscribe to changes in the 'BoardStatus' collection
+		pocketbase.collection('BoardStatus').subscribe('*', function (e) {
+			stores.fcb_status.set(e.record.fcb_status);
+			stores.pbb_status.set(e.record.pbb_status);
+			stores.daq_status.set(e.record.daq_status);
+			stores.fsb_status.set(e.record.fsb_status);
+			stores.bms_status.set(e.record.bms_status);
+			stores.cib_status.set(e.record.cib_status);
+			stores.lrb_status.set(e.record.lrb_status);
+
+			timestamps.board_status = Date.now();
+		});
 	};
 
 	return {
@@ -195,6 +215,7 @@ export const usePocketbase = (timestamps: Timestamps, stores: Stores) => {
 		writeStateChange,
 		writeArbitraryCommand: writeCommandMessage,
 		writeLoadCellCommand,
-		subscribeToCollections
+		subscribeToCollections,
+		writeControlMessage
 	};
 };

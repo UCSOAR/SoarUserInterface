@@ -19,7 +19,8 @@
 		subscribeToCollections,
 		writeStateChange,
 		writeArbitraryCommand,
-		writeLoadCellCommand
+		writeLoadCellCommand,
+		writeControlMessage
 	} = usePocketbaseHook;
 
 	const {
@@ -65,7 +66,14 @@
 		system_state,
 		timer_state,
 		timer_period,
-		timer_remaining
+		timer_remaining,
+		fcb_status,
+		pbb_status,
+		daq_status,
+		fsb_status,
+		bms_status,
+		cib_status,
+		lrb_status
 	} = stores;
 	
 	onMount(() => {
@@ -192,6 +200,14 @@
 	$: timer_period_display = $timer_period === undefined ? 'N/A' : ($timer_period / 1000).toFixed(0); // Convert to seconds
 	$: timer_remaining_display = $timer_remaining === undefined ? 'N/A' : ($timer_remaining / 1000).toFixed(0); // Convert to seconds
 
+	$: fcb_status_display = $fcb_status === undefined ? 'N/A' : $fcb_status;
+	$: pbb_status_display = $pbb_status === undefined ? 'N/A' : $pbb_status;
+	$: daq_status_display = $daq_status === undefined ? 'N/A' : $daq_status;
+	$: fsb_status_display = $fsb_status === undefined ? 'N/A' : $fsb_status;
+	$: bms_status_display = $bms_status === undefined ? 'N/A' : $bms_status;
+	$: cib_status_display = $cib_status === undefined ? 'N/A' : $cib_status;
+	$: lrb_status_display = $lrb_status === undefined ? 'N/A' : $lrb_status;
+
 	$: relayStatusOutdated = Date.now() - timestamps.relay_status > 5000;
 	$: combustionControlStatusOutdated = Date.now() - timestamps.combustion_control_status > 5000;
 	$: rcuTempOutdated = Date.now() - timestamps.rcu_temp > 5000;
@@ -204,6 +220,8 @@
 	$: sobTemperatureOutdated = Date.now() - timestamps.sob_temperature > 5000;
 	$: sysStateOutdated = Date.now() - timestamps.sys_state > 5000;
 	$: heartbeatOutdated = Date.now() - timestamps.heartbeat > 5000;
+
+	$: boardStatusOutdated = Date.now() - timestamps.board_status > 5000;
 
 	const handleSliderChange = async (e: any, target: string, openCommand: string, closeCommand: string) => {
 		e.preventDefault();
@@ -511,6 +529,83 @@
 		>
 			CAL
 		</button>
+	</div>
+
+	<div class="fcb_ping_button">
+		<button type="button" class="btn btn-sm small-button" 
+				on:click={() => writeControlMessage('FCB_BOARD','PINGCOMMAND')}>
+			<img src="/icons/grey-reload-icon.png" alt="Reload" />
+		</button>
+	</div>
+
+	<div class="pbb_ping_button">
+		<button type="button" class="btn btn-sm small-button" 
+				on:click={() => writeControlMessage('PBB_BOARD','PINGCOMMAND')}>
+			<img src="/icons/grey-reload-icon.png" alt="Reload" />
+		</button>
+	</div>
+
+	<div class="daq_ping_button">
+		<button type="button" class="btn btn-sm small-button" 
+				on:click={() => writeControlMessage('DAQ_BOARD','PINGCOMMAND')}>
+			<img src="/icons/grey-reload-icon.png" alt="Reload" />
+		</button>
+	</div>
+
+	<div class="fsb_ping_button">
+		<button type="button" class="btn btn-sm small-button" 
+				on:click={() => writeControlMessage('FSB_BOARD','PINGCOMMAND')}>
+			<img src="/icons/grey-reload-icon.png" alt="Reload" />
+		</button>
+	</div>
+
+	<div class="bms_ping_button">
+		<button type="button" class="btn btn-sm small-button" 
+				on:click={() => writeControlMessage('BMS_BOARD','PINGCOMMAND')}>
+			<img src="/icons/grey-reload-icon.png" alt="Reload" />
+		</button>
+	</div>
+
+	<div class="cib_ping_button">
+		<button type="button" class="btn btn-sm small-button" 
+				on:click={() => writeControlMessage('CIB_BOARD','PINGCOMMAND')}>
+			<img src="/icons/grey-reload-icon.png" alt="Reload" />
+		</button>
+	</div>
+
+	<div class="lrb_ping_button">
+		<button type="button" class="btn btn-sm small-button" 
+				on:click={() => writeControlMessage('LRB_BOARD','PINGCOMMAND')}>
+			<img src="/icons/grey-reload-icon.png" alt="Reload" />
+		</button>
+	</div>
+
+	<div class="fcb_status board_status {boardStatusOutdated ? 'outdated' : ''}">
+		<p>{fcb_status_display}</p>
+	</div>
+
+	<div class="pbb_status board_status {boardStatusOutdated ? 'outdated' : ''}">
+		<p>{pbb_status_display}</p>
+	</div>
+
+	<div class="daq_status board_status {boardStatusOutdated ? 'outdated' : ''}">
+		<p>{daq_status_display}</p>
+	</div>
+
+	<div class="fsb_status board_status {boardStatusOutdated ? 'outdated' : ''}">
+		<p>{fsb_status_display}</p>
+	</div>
+
+	<div class="bms_status board_status {boardStatusOutdated ? 'outdated' : ''}">
+		<p>{bms_status_display}</p>
+	</div>
+
+	<div class="cib_status board_status {boardStatusOutdated ? 'outdated' : ''}">
+		<p>{cib_status_display}</p>
+	</div>
+
+	<div class="lrb_status board_status {boardStatusOutdated ? 'outdated' : ''}">
+		<p>{lrb_status_display}</p>
 	</div>
 
 	<div class="rcu_tc1 rcu_temp {rcuTempOutdated ? 'outdated' : ''}">
