@@ -25,23 +25,23 @@ export interface Stores {
 	rcu_tc2_temperature: Writable<string | number | undefined>;
 	battery_voltage: Writable<any>;
 	power_source: Writable<any>;
-	upper_pv_pressure: Writable<string | number | undefined>;
-	rocket_mass: Writable<any>;
+	pt5_pressure: Writable<string | number | undefined>;
+	tc8: Writable<any>;
 	nos1_mass: Writable<any>;
 	nos2_mass: Writable<any>;
 	ib_pressure: Writable<string | number | undefined>;
-	lower_pv_pressure: Writable<string | number | undefined>;
-	pv_temperature: Writable<string | number | undefined>;
+	tc5: Writable<string | number | undefined>;
+	tc3: Writable<string | number | undefined>;
 	pt1_pressure: Writable<string | number | undefined>;
 	pt2_pressure: Writable<string | number | undefined>;
 	pt3_pressure: Writable<string | number | undefined>;
 	pt4_pressure: Writable<string | number | undefined>;
-	sob_tc1_temperature: Writable<string | number | undefined>;
-	sob_tc2_temperature: Writable<string | number | undefined>;
-	system_state: Writable<string | undefined>;
+	nos3_temperature: Writable<string | number | undefined>;
+	tc6_temperature: Writable<string | number | undefined>;
+	rcu_tc9: Writable<string | undefined>;
 	timer_state: Writable<string | undefined>;
-	timer_period: Writable<number | undefined>;
-	timer_remaining: Writable<number | undefined>;
+	tc4: Writable<number | undefined>;
+	pt6_pressure: Writable<number | undefined>;
 }
 
 export const initStores = () => {
@@ -67,22 +67,22 @@ export const initStores = () => {
 		rcu_tc2_temperature: writable<string | number | undefined>(undefined),
 		battery_voltage: writable(undefined),
 		power_source: writable(undefined),
-		upper_pv_pressure: writable<string | number | undefined>(undefined),
-		rocket_mass: writable(undefined),
+		pt5_pressure: writable<string | number | undefined>(undefined),
+		tc8: writable(undefined),
 		nos1_mass: writable(undefined),
 		nos2_mass: writable(undefined),
 		ib_pressure: writable<string | number | undefined>(undefined),
-		lower_pv_pressure: writable<string | number | undefined>(undefined),
-		pv_temperature: writable<string | number | undefined>(undefined),
+		tc5: writable<string | number | undefined>(undefined),
+		tc3: writable<string | number | undefined>(undefined),
 		pt1_pressure: writable<string | number | undefined>(undefined),
 		pt2_pressure: writable<string | number | undefined>(undefined),
 		pt3_pressure: writable<string | number | undefined>(undefined),
 		pt4_pressure: writable<string | number | undefined>(undefined),
-		sob_tc1_temperature: writable<string | number | undefined>(undefined),
-		sob_tc2_temperature: writable<string | number | undefined>(undefined),
-		system_state: writable<string | undefined>(undefined),
+		nos3_temperature: writable<string | number | undefined>(undefined),
+		tc6_temperature: writable<string | number | undefined>(undefined),
+		rcu_tc9: writable<string | undefined>(undefined),
 		timer_state: writable<string | undefined>(undefined),
-		timer_period: writable<number | undefined>(undefined),
-		timer_remaining: writable<number | undefined>(undefined)
+		tc4: writable<number | undefined>(undefined),
+		pt6_pressure: writable<number | undefined>(undefined)
 	};
 };

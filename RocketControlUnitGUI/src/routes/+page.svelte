@@ -49,23 +49,23 @@
         rcu_tc2_temperature,
         battery_voltage,
 		power_source,
-		upper_pv_pressure,
-		rocket_mass,
+		pt5_pressure,
+		tc8,
 		nos1_mass,
 		nos2_mass,
 		ib_pressure,
-		lower_pv_pressure,
-		pv_temperature,
+		tc5,
+		tc3,
 		pt1_pressure,
 		pt2_pressure,
 		pt3_pressure,
 		pt4_pressure,
-		sob_tc1_temperature,
-		sob_tc2_temperature,
-		system_state,
+		nos3_temperature,
+		tc6_temperature,
+		rcu_tc9,
 		timer_state,
-		timer_period,
-		timer_remaining
+		tc4,
+		pt6_pressure
 	} = stores;
 	
 	onMount(() => {
@@ -166,31 +166,31 @@
 	$: battery_display = $battery_voltage === undefined ? 'N/A' : $battery_voltage;
 	$: power_display = $power_source === undefined ? 'N/A' : $power_source ? 'ROCKET' : 'GROUND';
 
-	$: upper_pv_display = $upper_pv_pressure === undefined ? 'DC' : $upper_pv_pressure;
+	$: upper_pv_display = $pt5_pressure === undefined ? 'DC' : $pt5_pressure;
 
-	$: rocket_mass_display = $rocket_mass === undefined ? 'N/A' : Number($rocket_mass).toFixed(2);
+	$: tc8_display = $tc8 === undefined ? 'N/A' : Number($tc8).toFixed(2);
 
 	$: nos1_mass_display = $nos1_mass === undefined ? 'N/A' : Number($nos1_mass).toFixed(2);
 	$: nos2_mass_display = $nos2_mass === undefined ? 'N/A' : Number($nos2_mass).toFixed(2);
 
 	$: ib_pressure_display = $ib_pressure === undefined ? 'N/A' : $ib_pressure;
-	$: lower_pv_display = $lower_pv_pressure === undefined ? 'N/A' : $lower_pv_pressure;
+	$: lower_pv_display = $tc5 === undefined ? 'N/A' : $tc5;
 
-	$: pv_temperature_display = $pv_temperature === undefined ? 'N/A' : $pv_temperature;
+	$: tc3_display = $tc3 === undefined ? 'N/A' : $tc3;
 
 	$: pt1_pressure_display = $pt1_pressure === undefined ? 'N/A' : $pt1_pressure;
 	$: pt2_pressure_display = $pt2_pressure === undefined ? 'N/A' : $pt2_pressure;
 	$: pt3_pressure_display = $pt3_pressure === undefined ? 'N/A' : $pt3_pressure;
 	$: pt4_pressure_display = $pt4_pressure === undefined ? 'N/A' : $pt4_pressure;
 
-	$: sob_tc1_display = $sob_tc1_temperature === undefined ? 'N/A' : $sob_tc1_temperature;
-	$: sob_tc2_display = $sob_tc2_temperature === undefined ? 'N/A' : $sob_tc2_temperature;
+	$: nos3_display = $nos3_temperature === undefined ? 'N/A' : $nos3_temperature;
+	$: tc6_display = $tc6_temperature === undefined ? 'N/A' : $tc6_temperature;
 
-	$: system_state_display = $system_state === undefined ? 'N/A' : $system_state.replace('SYS_', '');
+	$: rcu_tc9_display = $rcu_tc9 === undefined ? 'N/A' : $rcu_tc9.replace('SYS_', '');
 
 	$: timer_state_display = $timer_state === undefined ? 'N/A' : $timer_state;
-	$: timer_period_display = $timer_period === undefined ? 'N/A' : ($timer_period / 1000).toFixed(0); // Convert to seconds
-	$: timer_remaining_display = $timer_remaining === undefined ? 'N/A' : ($timer_remaining / 1000).toFixed(0); // Convert to seconds
+	$: tc4_display = $tc4 === undefined ? 'N/A' : ($tc4 / 1000).toFixed(0); // Convert to seconds
+	$: pt6_pressure_display = $pt6_pressure === undefined ? 'N/A' : ($pt6_pressure / 1000).toFixed(0); // Convert to seconds
 
 	$: relayStatusOutdated = Date.now() - timestamps.relay_status > 5000;
 	$: combustionControlStatusOutdated = Date.now() - timestamps.combustion_control_status > 5000;
@@ -317,9 +317,9 @@
 		</SlideToggle>
 	</div>
 	
-	<div class="sol5_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+	<div class="pbvs_slide relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="sol5_slider"
+			name="pbvs_slide"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
 			bind:checked={$sol5_open}
@@ -329,9 +329,9 @@
 		</SlideToggle>
 	</div>
 
-	<div class="sol6_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+	<div class="pbvsomething_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="sol6_slider"
+			name="pbvsomething_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
 			bind:checked={$sol6_open}
@@ -341,9 +341,9 @@
 		</SlideToggle>
 	</div>
 
-	<div class="sol7_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+	<div class="pbvs relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="sol7_slider"
+			name="pbvs"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
 			bind:checked={$sol7_open}
@@ -353,9 +353,9 @@
 		</SlideToggle>
 	</div>
 
-	<div class="sol8a_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
+	<div class="pbv5_slider relay_status {relayStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="sol8a_slider"
+			name="pbv5_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
 			bind:checked={$sol8a_open}
@@ -389,9 +389,21 @@
 		</SlideToggle>
 	</div>
 
-	<div class="drain_slider combustion_control_status {combustionControlStatusOutdated ? 'outdated' : ''}">
+	<div class="pbv6_slider combustion_control_status {combustionControlStatusOutdated ? 'outdated' : ''}">
 		<SlideToggle
-			name="drain_slider"
+			name="pbv6_slider"
+			active="bg-primary-500 dark:bg-primary-500"
+			size="sm"
+			bind:checked={$drain_open}
+			on:click={(e) => handleSliderChange(e, 'NODE_DMB', 'RSC_OPEN_DRAIN', 'RSC_CLOSE_DRAIN')}
+		>
+			{drain_display}
+		</SlideToggle>
+	</div>
+
+	<div class="pbv7_slider combustion_control_status {combustionControlStatusOutdated ? 'outdated' : ''}">
+		<SlideToggle
+			name="pbv7_slider"
 			active="bg-primary-500 dark:bg-primary-500"
 			size="sm"
 			bind:checked={$drain_open}
@@ -491,7 +503,7 @@
 		</button>
 	</div>
 
-	<div class="rail_tare_button">
+	<div class="nos3_tare">
 		<button 
 			type="button" 
 			class="btn btn-sm variant-filled-secondary" 
@@ -501,7 +513,7 @@
 		</button>
 	</div>
 
-	<div class="rail_cal_button">
+	<div class="nos3_cal">
 		<button 
 			type="button" 
 			class="btn btn-sm variant-filled-error" 
@@ -551,7 +563,7 @@
 	<div class="box2_continuity">
 	</div>
 
-	<div class="mev_status combustion_control_status {combustionControlStatusOutdated ? 'outdated' : ''}">
+	<div class="rcu_tc7 combustion_control_status {combustionControlStatusOutdated ? 'outdated' : ''}">
 		<p>{mev_display}</p>
 	</div>
 
@@ -559,48 +571,48 @@
 		<p>{battery_display}</p>
 	</div>
 
-	<div class="upper_pv_pressure">
+	<div class="pt5_pressure">
 		<p>{upper_pv_display}</p>
 	</div>
 
-	<div class="rocket_mass launch_rail_load_cell {launchRailLoadCellOutdated ? 'outdated' : ''}">
-		<p>{rocket_mass_display}</p>
+	<div class="tc8 launch_rail_load_cell {launchRailLoadCellOutdated ? 'outdated' : ''}">
+		<p>{tc8_display}</p>
 	</div>
 
 	<div class="ib_pressure pbb_pressure {pbbPressureOutdated ? 'outdated' : ''}">
 		<p>{ib_pressure_display}</p>
 	</div>
 
-	<div class="lower_pv_pressure pbb_pressure {pbbPressureOutdated ? 'outdated' : ''}">
+	<div class="tc5 pbb_pressure {pbbPressureOutdated ? 'outdated' : ''}">
 		<p>{lower_pv_display}</p>
 	</div>
 
-	<div class="pv_temperature pbb_temperature {pbbTemperatureOutdated ? 'outdated' : ''}">
-		<p>{pv_temperature_display}</p>
+	<div class="tc3 pbb_temperature {pbbTemperatureOutdated ? 'outdated' : ''}">
+		<p>{tc3_display}</p>
 	</div>
 
-	<div class="sob_tc1 sob_temperature {sobTemperatureOutdated ? 'outdated' : ''}">
-		<p>{sob_tc1_display}</p>
+	<div class="nos3 sob_temperature {sobTemperatureOutdated ? 'outdated' : ''}">
+		<p>{nos3_display}</p>
 	</div>
 
-	<div class="sob_tc2 sob_temperature {sobTemperatureOutdated ? 'outdated' : ''}">
-		<p>{sob_tc2_display}</p>
+	<div class="tc6 sob_temperature {sobTemperatureOutdated ? 'outdated' : ''}">
+		<p>{tc6_display}</p>
 	</div>
 
-	<div class="system_state sys_state {sysStateOutdated ? 'outdated' : ''}">
-		<p>{system_state_display}</p>
+	<div class="rcu_tc9 sys_state {sysStateOutdated ? 'outdated' : ''}">
+		<p>{rcu_tc9_display}</p>
 	</div>
 
 	<div class="timer_state heartbeat {heartbeatOutdated ? 'outdated' : ''}">
 		<p>{timer_state_display}</p>
 	</div>
 
-	<div class="timer_period heartbeat {heartbeatOutdated ? 'outdated' : ''}">
-		<p>{timer_period_display}</p>
+	<div class="tc4 heartbeat {heartbeatOutdated ? 'outdated' : ''}">
+		<p>{tc4_display}</p>
 	</div>
 
-	<div class="timer_remaining heartbeat {heartbeatOutdated ? 'outdated' : ''}">
-		<p>{timer_remaining_display}</p>
+	<div class="pt6_pressure heartbeat {heartbeatOutdated ? 'outdated' : ''}">
+		<p>{pt6_pressure_display}</p>
 	</div>
 
 	<!-- Render different buttons based on the current state -->
